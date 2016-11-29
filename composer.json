@@ -1,5 +1,5 @@
 {
-    "name": "SmoothPhp/LaravelPapertrailEventBusLogger",
+    "name": "smoothphp/laravel-papertrail-event-bus-logger",
     "type": "library",
     "description": "Log Smoothphp EventBus events in papertrail",
     "keywords": [
