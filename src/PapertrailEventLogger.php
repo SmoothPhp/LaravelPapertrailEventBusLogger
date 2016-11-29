@@ -8,7 +8,7 @@ use SmoothPhp\Contracts\EventBus\EventListener;
 /**
  * Class PapertrailEventLogger
  * @package SmoothPhp\LaravelPapertrailEventBusLogger
- * @author Simon Bennett <simon@bennett.im>
+ * @author Simon Bennett <simon@pixelatedcrow.com>
  */
 final class PapertrailEventLogger implements EventListener
 {
@@ -33,10 +33,9 @@ final class PapertrailEventLogger implements EventListener
      */
     public function __construct(Repository $config)
     {
-        $this->papertrailHost = $this->config->get('service.papertrail.host');
-        $this->papertrailPort = $this->config->get('services.papertrail.port');
-        $this->papertrailAppName = $this->config->get('services.papertrail.app_name');
-
+        $this->papertrailHost = $config->get('services.papertrail.host');
+        $this->papertrailPort = $config->get('services.papertrail.port');
+        $this->papertrailAppName = $config->get('services.papertrail.name');
     }
 
     /**
@@ -48,7 +47,6 @@ final class PapertrailEventLogger implements EventListener
         $name = explode('.', $domainMessage->getType());
         $name = preg_replace('/(?!^)[A-Z]{2,}(?=[A-Z][a-z])|[A-Z][a-z]/', ' $0', end($name));
         $this->sendToPapertrail(trim(ucwords($name)) . " ({$domainMessage->getType()})");
-
     }
 
     /**
