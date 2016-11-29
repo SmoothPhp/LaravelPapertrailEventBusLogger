@@ -7,25 +7,37 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-**Note:** Replace ```Simon Bennett``` ```mrsimonbennett``` ```https://pixelatedcrow.com``` ```simon@pixelatedcrow.com``` ```SmoothPhp``` ```LaravelPapertrailEventBusLogger``` ```Log Smoothphp EventBus events in papertrail``` with their correct values in [README.md](README.md), [CHANGELOG.md](CHANGELOG.md), [CONTRIBUTING.md](CONTRIBUTING.md), [LICENSE.md](LICENSE.md) and [composer.json](composer.json) files, then delete this line. You can run `$ php prefill.php` in the command line to make all replacements at once. Delete the file prefill.php as well.
-
-This is where your description should go. Try and limit it to a paragraph or two, and maybe throw in a mention of what
-PSRs you support to avoid any confusion with users and contributors.
-
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require SmoothPhp/LaravelPapertrailEventBusLogger
+$ composer require smoothphp/laravel-papertrail-event-bus-logger
 ```
 
 ## Usage
 
+Add the following to services.php config file
 ``` php
-$skeleton = new SmoothPhp\LaravelPapertrailEventBusLogger();
-echo $skeleton->echoPhrase('Hello, League!');
+'papertrail' => [
+        'host' => '*.papertrailapp.com',
+        'port' => 111111,
+        'name' => 'app name',
+]
 ```
+add `\SmoothPhp\LaravelPapertrailEventBusLogger\PapertrailEventLogger::class,` to cqrses.php `event_bus_listeners`
+e.g.
+
+```php
+    'event_bus_listeners'   => [
+        \SmoothPhp\LaravelAdapter\EventBus\EventBusLogger::class,
+        \SmoothPhp\LaravelAdapter\StrongConsistency\PushEventThroughQueueWithCommandId::class,
+        \SmoothPhp\LaravelPapertrailEventBusLogger\PapertrailEventLogger::class,
+
+    ],
+```
+
+
 
 ## Change log
 
